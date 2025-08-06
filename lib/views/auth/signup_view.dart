@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:event_manager/const/controller/controller.dart';
 import 'package:event_manager/custom_widgets/filed_widget.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +13,9 @@ class MySignup_Page extends StatefulWidget {
 class __MySignup_PageState extends State<MySignup_Page> {
   @override
   Widget build(BuildContext context) {
+    TextEditingController authnameController=TextEditingController();
+    TextEditingController authemailController =TextEditingController();
+    TextEditingController authaddressController = TextEditingController();
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SafeArea(
@@ -30,31 +32,34 @@ class __MySignup_PageState extends State<MySignup_Page> {
                 children: [
                   Text('SignUp',),
           
-                  MyFiled_Name(controller:nameController),
-                  MyFiled_Email(controller:emailController),
-                  MyFiled_Address(controller:addressController),
+                  appTextField(controller: authnameController,icon: Icons.person, label: 'Name', hint: "Enter name here"),
+                  appTextField(controller:authemailController,icon:Icons.email, label: 'Email',hint:'Enter Email Here'),
+                  appTextField(controller: authaddressController, label: 'Address', icon: Icons.location_city, hint: 'Enter Address here'),
+
                   ElevatedButton(onPressed: ()async{
-                    String name = nameController.text.trim();
-                    String email = emailController.text.trim();
-                    String Address = addressController.text.trim();
-                    if (name.isEmpty|| email.isEmpty|| Address.isEmpty) {
+                   
+                    if (authnameController.text.isEmpty|| authemailController.text.isEmpty|| authaddressController.text.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('All Fileds are Required')));
                       return;
-                    }
+                    }else{
+                      
                     try {
                       await FirebaseFirestore.instance.collection('user').add({
-                        'name1':name,
-                        'email1':email,
-                        'address1':Address,
+                        'name':authnameController.text,
+                        'email':authemailController.text,
+                        'address': authaddressController.text,
                         'timestamp':FieldValue.serverTimestamp(),
                       });
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Signup Successfully')));
+                      Navigator.pushNamed(context, '/event');
+                      
                     } catch (e) {
                       print('Error:$e');
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error Saving Data')));
                     }
-                  }, child: Text("Next_Page"),),
-                ],
+                    
+                  } 
+                    
+                    },child: Text("Next_Page"),)],
               ),
             ),
           ),

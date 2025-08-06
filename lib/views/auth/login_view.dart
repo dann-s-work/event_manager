@@ -1,4 +1,4 @@
-import 'package:event_manager/const/controller/controller.dart';
+import 'package:event_manager/custom_widgets/app_snackbar.dart';
 import 'package:event_manager/custom_widgets/filed_widget.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +14,9 @@ class MyLogin_Page extends StatefulWidget {
 class _MyLogin_PageState extends State<MyLogin_Page> {
   @override
   Widget build(BuildContext context) {
+    TextEditingController nameController=TextEditingController();
+    TextEditingController emailController= TextEditingController();
+    TextEditingController addressController= TextEditingController();
     return Scaffold(
         resizeToAvoidBottomInset: true,
         body: SafeArea(
@@ -27,35 +30,34 @@ class _MyLogin_PageState extends State<MyLogin_Page> {
                   spacing: 30,
                   children: [
                       Text("Login"),
-                     MyFiled_Name(controller: nameController,),
-                      MyFiled_Email(controller: emailController,),
-                      MyFiled_Address(controller: addressController,),
+                     appTextField(controller: nameController,icon: Icons.person, label: 'Name', hint: "Enter name here"),
+                      appTextField(controller: emailController, label: 'Email', icon: Icons.email, hint: 'Enter Email here'),
+                     appTextField(controller: addressController, label: 'Address', icon: Icons.location_city, hint: 'Enter Address here'),
                       ElevatedButton(onPressed: ()async{
-                        String name= nameController.text.trim();
-                        String email = emailController.text.trim();
-                        String Address =addressController.text.trim();
-                        if (name.isEmpty|| email.isEmpty|| Address.isEmpty) {
+                        if (nameController.text.isEmpty|| emailController.text.isEmpty|| addressController.text.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('All Fields are Required')));
                           return;
-                          
-                        }
-                        try {
+                        }else{
+try {
                           await FirebaseFirestore.instance.collection('user').add({
-                            'name':name,
-                             'email':email,
-                             'address':Address,
+                            'name':nameController.text ,
+                             'email':emailController.text,
+                             'address':addressController.text,
                              'timestamp':FieldValue.serverTimestamp(),
                           });
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text('Login Successfully'))
                           );
+                          print('NAVIGATION');
                           Navigator.pushNamed(context, '/event');
+                          
                         } catch (e) {
                           print("Error:$e");
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error Saving Data')));
+                          showAppSnackbar(context: context, message: 'error:$e');
                         }
-                        
-                      }, child: Text('Events'))
+                      
+                        }
+                        }, child: Text('Login'))
                   ],
               ),
             ),
