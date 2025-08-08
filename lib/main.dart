@@ -1,4 +1,5 @@
-import 'package:event_manager/event.dart';
+
+import 'package:event_manager/signout.dart';
 import 'package:event_manager/views/auth/login_view.dart';
 import 'package:event_manager/views/auth/signup_view.dart';
 import 'package:event_manager/views/home/home_view.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         '/':(context)=>HomeView(),
         '/login':(context)=>MyLogin_Page(),
         '/signup':(context)=>MySignup_Page(),
-        '/event' : (context)=> MyEvent_Screen(),
+        '/signout' : (context)=> Signout(),
       }
     );
   }

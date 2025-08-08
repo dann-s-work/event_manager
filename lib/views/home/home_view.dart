@@ -1,13 +1,17 @@
 import 'package:event_manager/const/app_images.dart';
 import 'package:event_manager/custom_widgets/image_widgets.dart';
 import 'package:event_manager/views/auth/login_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+ 
+  HomeView({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
+
     return  Scaffold(
 
         appBar: AppBar(
@@ -19,7 +23,7 @@ class HomeView extends StatelessWidget {
           children: [
             Center(
                   child: Text(
-                    'Welcome to the Home View!',
+                    'Welcome to home page',
                     style: TextStyle(fontSize: 24),
                   ),
                 ),
