@@ -1,6 +1,7 @@
 import 'package:event_manager/custom_widgets/app_snackbar.dart';
 import 'package:event_manager/custom_widgets/filed_widget.dart';
 import 'package:event_manager/views/auth/firebase_services.dart';
+import 'package:event_manager/views/auth/profile_update.dart';
 import 'package:event_manager/views/auth/signup_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,7 @@ class _MyLogin_PageState extends State<MyLogin_Page> {
                            if (snapshot.docs.isNotEmpty) {
                              print('User profile Data : ${snapshot.docs.first.data()}');
                              showAppSnackbar(context: context, message: 'Login Successfully');
-                             Navigator.pushNamed(context, '/signout');
+                             Navigator.push(context, MaterialPageRoute(builder: (context)=> ProfileUpdate()));
 
                            }else{
                             showAppSnackbar(context: context, message: 'No profile found for this user');

@@ -17,6 +17,7 @@ class __MySignup_PageState extends State<MySignup_Page> {
    TextEditingController authnameController=TextEditingController();
     TextEditingController authemailController =TextEditingController();
     TextEditingController authaddressController = TextEditingController();
+    TextEditingController authphoneController = TextEditingController();
     TextEditingController authpasswordController = TextEditingController();
     @override
     void dispose(){
@@ -53,6 +54,7 @@ class __MySignup_PageState extends State<MySignup_Page> {
                   appTextField(controller: authnameController,icon: Icons.person, label: 'Name', hint: "Enter name here"),
                   appTextField(controller:authemailController,icon:Icons.email, label: 'Email',hint:'Enter Email Here'),
                   appTextField(controller: authaddressController, label: 'Address', icon: Icons.location_city, hint: 'Enter Address here'),
+                  appTextField(controller: authphoneController, label:'Phone Number',icon:Icons.phone,hint:'Enter Phone Number here'),
                   appPasswordField(controller: authpasswordController, label:'Password', hint: 'Enter Your Password', icon: Icons.lock,
                   obscureText: obscureauthPassword, toggleObscure: togglePassword),
 
@@ -65,7 +67,7 @@ class __MySignup_PageState extends State<MySignup_Page> {
                     }else{
                       
                     try {
-                      User? user= await _auth.signUpwithemailandpassword(authemailController.text,authpasswordController.text);
+                      User? user= await _auth.signUpwithemailandpassword(authemailController.text,authpasswordController.text,);
                       if (user!= null) {
                               print('user is successfully created');
                                await FirebaseFirestore.instance.collection('user').add({
@@ -73,6 +75,7 @@ class __MySignup_PageState extends State<MySignup_Page> {
                         'email':authemailController.text,
                         'address': authaddressController.text,
                         'password': authpasswordController.text,
+                        'phonenumber': authphoneController.text,
                         'timestamp':FieldValue.serverTimestamp(),
                       });
                        Navigator.pushNamed(context, '/signout');
