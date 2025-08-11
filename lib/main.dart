@@ -1,8 +1,8 @@
 
 import 'package:event_manager/signout.dart';
 import 'package:event_manager/views/auth/login_view.dart';
-import 'package:event_manager/views/auth/signup_view.dart';
 import 'package:event_manager/views/home/home_view.dart';
+import 'package:event_manager/views/signup_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/':(context)=>HomeView(),
         '/login':(context)=>MyLogin_Page(),
-        '/signup':(context)=>MySignup_Page(),
+        '/signup':(context)=>Signup_Page(),
         '/signout' : (context)=> Signout(),
       }
     );

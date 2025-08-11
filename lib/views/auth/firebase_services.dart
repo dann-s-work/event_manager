@@ -7,18 +7,20 @@ class FirebaseServices {
           UserCredential credential = await _auth.createUserWithEmailAndPassword(email: email, password: password,);
             return credential.user;
           
-        } catch (e) {
-          print('some error occured');
-        }
-        return null;
+        }  on FirebaseAuthException catch (e) {
+      print("Sign Up Error Code: ${e.code}");
+      print("Sign Up Error Message: ${e.message}");
+      rethrow; 
+    }
   }
   Future<User?> signInwithemailandpassword(String email, String password)async{
     try {
       UserCredential credential = await _auth.signInWithEmailAndPassword(email: email, password: password);
       return credential.user;
-    } catch (e) {
-      print('some error occured');
+    } on FirebaseAuthException catch (e) {
+      print("Sign Up Error Code: ${e.code}");
+      print("Sign Up Error Message: ${e.message}");
+      rethrow; // so UI can also handle it
     }
-    return null;
   }
 }
