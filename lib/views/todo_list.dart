@@ -49,7 +49,7 @@ class TodoList extends StatelessWidget {
         
        } ),
        floatingActionButton: FloatingActionButton(onPressed: (){
-        Navigator.push(context, MaterialPageRoute(builder: (_)=> AddTodo()));
+        Navigator.push(context, MaterialPageRoute(builder: (_)=> AddtodoView()));
 
        },
        child: Icon(Icons.add),
