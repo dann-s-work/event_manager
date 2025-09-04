@@ -10,7 +10,7 @@ class TodoDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(title),),
       body: Padding(padding: EdgeInsets.all(20),
-      child: Text(description.isEmpty ?"No Description Provided":description,),
+      child: Text(description.isEmpty ?"No Description Provided":description, style: TextStyle(),softWrap: true,maxLines: null,overflow: TextOverflow.visible,),
       ),
     );
   }

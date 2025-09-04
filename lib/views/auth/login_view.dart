@@ -1,7 +1,7 @@
 import 'package:event_manager/custom_widgets/app_snackbar.dart';
 import 'package:event_manager/custom_widgets/filed_widget.dart';
-import 'package:event_manager/views/auth/firebase_services.dart';
-import 'package:event_manager/views/auth/profile_update.dart';
+import 'package:event_manager/services/firebase_services.dart';
+import 'package:event_manager/views/home/profile_update.dart';
 import 'package:event_manager/views/todo_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
